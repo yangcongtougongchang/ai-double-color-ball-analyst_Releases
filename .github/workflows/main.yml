@@ -3,7 +3,7 @@ name: Update SSQ Data
 on:
   workflow_dispatch:
   schedule:
-    - cron: '30 13 * * *'
+    - cron: '53 06 * * *'
 
 jobs:
   update-data:
