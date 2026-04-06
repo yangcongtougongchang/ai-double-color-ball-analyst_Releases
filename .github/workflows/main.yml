@@ -5,6 +5,9 @@ on:
   schedule:
     - cron: '30 13 * * *'
 
+permissions:
+  contents: write
+
 jobs:
   update-data:
     runs-on: ubuntu-latest
@@ -28,5 +31,13 @@ jobs:
           git add latest.json history.json
           git commit -m "update ssq data" || echo "No changes to commit"
 
-      - name: Push changes
+      - name: Push changes to GitHub
         run: git push
+
+      - name: Sync latest data to Gitee (example)
+        env:
+          GITEE_USERNAME: liyanlian
+          GITEE_TOKEN: 70f76ca5b6bafc9f6f7f82e0b56216f6
+        run: |
+          git remote add gitee "https://${GITEE_USERNAME}:${GITEE_TOKEN}@gitee.com/liyanlian/ai-double-color-ball-analyst_-releases.git"
+          git push gitee HEAD:master
